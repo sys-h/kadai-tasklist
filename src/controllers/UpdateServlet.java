@@ -46,11 +46,12 @@ public class UpdateServlet extends HttpServlet {
             t.setContent(content);
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            t.setUpdated_at(currentTime);       // 更新日時のみ上書き
+            t.setUpdated_at(currentTime);
 
             // データベースを更新
             em.getTransaction().begin();
             em.getTransaction().commit();
+            request.getSession().setAttribute("flush", "更新が完了しました。");
             em.close();
 
             // セッションスコープ上の不要になったデータを削除
